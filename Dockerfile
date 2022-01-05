@@ -9,9 +9,9 @@ RUN CGO_ENABLED=0 make build
 
 FROM scratch
 
-COPY --from=builder /code/bin/ipxedust-linux /ipxedust-linux
+COPY --from=builder /code/bin/ipxedust-linux /ipxedust
 EXPOSE 69/udp
 EXPOSE 8080/tcp
 ENV IPXE_TFTP_SINGLE_PORT=TRUE
 
-ENTRYPOINT ["/ipxedust-linux"]
+ENTRYPOINT ["/ipxedust"]
