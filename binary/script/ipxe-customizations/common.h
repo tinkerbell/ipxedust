@@ -1,7 +1,9 @@
 #define DIGEST_CMD            /* Image crypto digest commands */
 #define DOWNLOAD_PROTO_HTTPS  /* Secure Hypertext Transfer Protocol */
+#define DOWNLOAD_PROTO_NFS    /* NFS */
 #define IMAGE_TRUST_CMD       /* Image trust management commands */
 #define NET_PROTO_IPV6        /* IPv6 protocol */
+#define NET_PROTO_LACP        /* Link Aggregation control protocol */
 #define NSLOOKUP_CMD          /* DNS resolving command */
 #define NTP_CMD               /* NTP commands */
 #define NVO_CMD               /* Non-volatile option storage commands */
@@ -11,7 +13,6 @@
 #define REBOOT_CMD            /* Reboot command */
 #define SANBOOT_PROTO_HTTP    /* HTTP SAN protocol */
 #define VLAN_CMD              /* VLAN commands */
-#define DOWNLOAD_PROTO_NFS    /* NFS */
 
 #undef CRYPTO_80211_WEP       /* WEP encryption (deprecated and insecure!) */
 #undef CRYPTO_80211_WPA2      /* Add support for stronger WPA cryptography */
@@ -21,7 +22,6 @@
 #undef IMAGE_PNG              /* PNG image support */
 #undef IMAGE_PNM              /* PNM image support */
 #undef IWMGMT_CMD             /* Wireless interface management commands */
-#undef NET_PROTO_LACP         /* Link Aggregation control protocol */
 #undef NET_PROTO_STP          /* Spanning Tree protocol */
 #undef ROUTE_CMD              /* Routing table management commands */
 #undef VNIC_IPOIB             /* Infiniband IPoIB virtual NICs */
