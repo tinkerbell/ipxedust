@@ -1,0 +1,8 @@
+FROM scratch
+
+COPY ipxedust /ipxedust
+EXPOSE 69/udp
+EXPOSE 8080/tcp
+ENV IPXE_TFTP_SINGLE_PORT=TRUE
+
+ENTRYPOINT ["/ipxedust"]

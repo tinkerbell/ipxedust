@@ -1,5 +1,5 @@
 OSFLAG:=$(shell go env GOHOSTOS)
-BINARY:=ipxe
+BINARY:=ipxedust
 IPXE_BUILD_SCRIPT:=binary/script/build_ipxe.sh
 IPXE_NIX_SHELL:=binary/script/shell.nix
 
@@ -56,3 +56,7 @@ ifeq (${OSFLAG},linux)
 else
 	@$(MAKE) build-darwin
 endif
+
+.PHONY: build-image
+build-image: ## Build the container image
+	docker build -t ${BINARY}:latest .
