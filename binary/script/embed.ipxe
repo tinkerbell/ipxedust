@@ -25,7 +25,11 @@ echo Booting from net${idx}...
 autoboot net${idx}
 
 :autoboot
-autoboot
+set attempt:int32 0
+:retry
+iseq ${attempt} 5 && error-with-autoboot
+echo autoboot attempt #${attempt}...
+autoboot || inc attempt && goto retry
 
 :boot-with-vlan
 set idx:int32 0
@@ -41,3 +45,7 @@ autoboot net${idx}-${vlan-id}
 :error
 echo Failed to find the vlan interface
 shell
+
+:error-with-autoboot
+echo failed to autoboot
+prompt --key 0x02 --timeout 2000 Press Ctrl-B for the iPXE command line... && shell ||
