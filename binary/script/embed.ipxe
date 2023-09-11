@@ -21,13 +21,16 @@ set idx:int32 0
 isset ${net${idx}/ip} && goto interfaces-loop-done || iseq ${idx} 50 && goto autoboot || inc idx && goto interfaces-loop
 
 :interfaces-loop-done
+set attempt:int32 0
+:retry
+iseq ${attempt} 5 && goto error-with-autoboot
 echo Booting from net${idx}...
-autoboot net${idx}
+autoboot net${idx} || inc attempt && goto retry
 
 :autoboot
 set attempt:int32 0
 :retry
-iseq ${attempt} 5 && error-with-autoboot
+iseq ${attempt} 5 && goto error-with-autoboot
 echo autoboot attempt #${attempt}...
 autoboot || inc attempt && goto retry
 
