@@ -23,7 +23,7 @@ isset ${net${idx}/ip} && goto interfaces-loop-done || iseq ${idx} 50 && goto aut
 :interfaces-loop-done
 set attempt:int32 0
 :retry
-iseq ${attempt} 5 && goto error-with-autoboot
+iseq ${attempt} 5 && goto autoboot
 echo Booting from net${idx}...
 autoboot net${idx} || inc attempt && goto retry
 
