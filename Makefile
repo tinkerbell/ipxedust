@@ -40,14 +40,8 @@ binary/snp.efi: $(ipxe_readme) ## build snp.efi
 binary/ipxe.iso: $(ipxe_readme) ## build ipxe.iso
 	+${IPXE_BUILD_SCRIPT} bin-x86_64-efi/ipxe.iso "$(ipxe_sha_or_tag)" $(ipxe_build_in_docker) $@  "${IPXE_NIX_SHELL}"
 
-.DELETE_ON_ERROR: binary/ipxe-efi.img
-binary/ipxe-efi.img: binary/ipxe.efi
-	qemu-img create -f raw $@ 1440K
-	sgdisk --clear --set-alignment=34 --new 1:34:-0 --typecode=1:EF00 --change-name=1:"IPXE" $@
-	mkfs.vfat -F 12 -n "IPXE" --offset 34 $@ 1400
-	mmd -i $@@@17K ::/EFI
-	mmd -i $@@@17K ::/EFI/BOOT
-	mcopy -i $@@@17K $< ::/EFI/BOOT/BOOTX64.efi
+binary/ipxe-efi.img: binary/ipxe.efi ## build ipxe-efi.img
+	binary/script/build_floppy.sh $(ipxe_build_in_docker) "${IPXE_NIX_SHELL}" "$@"
 
 .PHONY: binary/clean
 binary/clean: ## clean ipxe binaries, upstream ipxe source code directory, and ipxe source tarball
