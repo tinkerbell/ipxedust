@@ -22,10 +22,15 @@ isset ${net${idx}/ip} && goto interfaces-loop-done || iseq ${idx} 50 && goto aut
 
 :interfaces-loop-done
 echo Booting from net${idx}...
-autoboot net${idx}
+set idx:int32 0
+:autoboot-interface-loop
+autoboot net${idx} || iseq ${idx} 10 || inc idx && goto autoboot-interface-loop
 
 :autoboot
-autoboot
+set idx:int32 0
+:autoboot-loop
+autoboot || iseq ${idx} 10 && goto autoboot-error || inc idx && goto autoboot-loop
+
 
 :boot-with-vlan
 set idx:int32 0
@@ -41,3 +46,7 @@ autoboot net${idx}-${vlan-id}
 :error
 echo Failed to find the vlan interface
 shell
+
+:autoboot-error
+echo Failed to autoboot
+exit
