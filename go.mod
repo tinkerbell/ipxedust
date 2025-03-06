@@ -1,6 +1,7 @@
 module github.com/tinkerbell/ipxedust
 
 go 1.22.9
+toolchain go1.23.7
 
 require (
 	dario.cat/mergo v1.0.1
@@ -16,7 +17,7 @@ require (
 	github.com/rs/zerolog v1.33.0
 	go.opentelemetry.io/otel v1.31.0
 	go.opentelemetry.io/otel/trace v1.31.0
-	golang.org/x/sync v0.10.0
+	golang.org/x/sync v0.12.0
 )
 
 require (
