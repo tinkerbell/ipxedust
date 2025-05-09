@@ -1,7 +1,7 @@
 #!ipxe
 
 set user-class Tinkerbell
-echo Welcome to Neverland!
+echo Welcome to Latitude.sh!
 
 # Allow the operator to drop to a shell
 prompt --key 0x02 --timeout 2000 Press Ctrl-B for the iPXE command line... && shell ||
@@ -28,7 +28,8 @@ set count:int32 1
 echo trying dhcp ( attempt ${count}/${retry-max} )
 dhcp net${idx} && goto done1 || iseq ${count} ${retry-max} && goto done1 || inc count && goto retry-loop1
 :done1
-autoboot net${idx} || exit
+echo Booting into iPXE through HTTP
+chain --autofree http://45.250.254.224:7171/${net0/mac}/auto.ipxe || shell
 
 :autoboot
 set retry-max:int32 10
@@ -37,7 +38,8 @@ set count:int32 1
 echo trying dhcp ( attempt ${count}/${retry-max} )
 dhcp && goto done2 || iseq ${count} ${retry-max} && goto done2 || inc count && goto retry-loop2
 :done2
-autoboot || exit
+echo Booting into iPXE through HTTP
+chain --autofree http://45.250.254.224:7171/${net0/mac}/auto.ipxe || shell
 
 :boot-with-vlan
 set idx:int32 0
@@ -47,8 +49,8 @@ set idx:int32 0
   inc idx && goto loop
 
 :loop_done
-echo Booting from net${idx}-${vlan-id}...
-autoboot net${idx}-${vlan-id}
+echo Booting into iPXE through HTTP
+chain --autofree http://45.250.254.224:7171/${net0/mac}/auto.ipxe || shell
 
 :error
 echo Failed to find the vlan interface
