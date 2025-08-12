@@ -1,3 +1,8 @@
+> [!IMPORTANT]  
+> The ipxedust repo has been deprecated. All functionality has been moved to https://github.com/tinkerbell/tinkerbell.
+> For more details, see the roadmap issue [#41](https://github.com/tinkerbell/roadmap/issues/41).
+> This repository is scheduled to be archived by the end of 2025.
+
 [![Test and Build](https://github.com/tinkerbell/ipxedust/actions/workflows/ci.yaml/badge.svg)](https://github.com/tinkerbell/ipxedust/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/tinkerbell/ipxedust/branch/main/graph/badge.svg)](https://codecov.io/gh/tinkerbell/ipxedust)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tinkerbell/ipxedust)](https://goreportcard.com/report/github.com/tinkerbell/ipxedust)
